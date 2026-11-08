@@ -1,0 +1,8 @@
+{
+  "$schema": "VALUE",
+  "packages": {
+    ".": {
+      "release-type": "VALUE"
+    }
+  }
+}

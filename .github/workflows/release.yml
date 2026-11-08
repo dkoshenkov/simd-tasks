@@ -1,0 +1,37 @@
+name: VALUE
+
+on:
+  push:
+    branches:
+      - VALUE
+
+concurrency:
+  group: VALUE
+  cancel-in-progress: VALUE
+
+permissions:
+  contents: VALUE
+  issues: VALUE
+  pull-requests: VALUE
+
+jobs:
+  has-go-code:
+    runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.detect.outputs.value }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: detect
+        run: |
+          if find . -type f -name '*.go' -not -path './vendor/*' -print -quit | grep -q .; then
+            echo "value=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  release-please:
+    needs: has-go-code
+    if: needs.has-go-code.outputs.value == 'true'
+    uses: VALUE
+    secrets:
+      token: VALUE
