@@ -20,7 +20,7 @@ jobs:
     outputs:
       value: ${{ steps.detect.outputs.value }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: detect
         run: |
           if find . -type f -name '*.go' -not -path './vendor/*' -print -quit | grep -q .; then
